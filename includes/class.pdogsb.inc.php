@@ -531,7 +531,7 @@ class PdoGsb {
      */
     public function getMoisFicheDeFrais() {
         $requetePrepare = PdoGSB::$monPdo->prepare(
-                "select distinct mois from fichefrais where idetat='CR'");
+                "select distinct mois from fichefrais where idetat='CL'");
         $requetePrepare->execute();
         $leMois = array();
         while ($laLigne = $requetePrepare->fetch()) {
@@ -581,7 +581,7 @@ class PdoGsb {
                 "select CONCAT(nom, ' ', prenom)as nomvisiteur, idvisiteur as visiteur from fichefrais "
                 . "inner join visiteur on visiteur.id = fichefrais.idvisiteur "
                 . "where mois=:unMois "
-                . "AND idetat='CR'");
+                . "AND idetat='CL'");
         $requetePrepare->bindParam(':unMois', $mois, PDO::PARAM_STR);
         $requetePrepare->execute();
         $res = $requetePrepare->fetchAll(PDO::FETCH_ASSOC);
